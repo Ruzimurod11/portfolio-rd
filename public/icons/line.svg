@@ -1,0 +1,16 @@
+<svg width="128" height="20" viewBox="0 0 128 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradientLine" x1="0" y1="0" x2="128" y2="0">
+      <stop offset="0%" stop-color="#ec4899" />
+      <stop offset="50%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+  <path
+    d="M2 10 C32 0, 96 20, 126 10"
+    stroke="url(#gradientLine)"
+    stroke-width="3"
+    stroke-linecap="round"
+    fill="none"
+  />
+</svg>
