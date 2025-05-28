@@ -1,13 +1,18 @@
+import Title from "@/components/common/title"
 import Image from "next/image"
 import Link from "next/link"
+import { FaAngleRight } from "react-icons/fa"
 
 export default function AboutPage() {
     return (
         <>
             {/* Title */}
-            <h1 className="text-4xl font-bold text-center text-purple-600 mb-6">
-                Men haqimda
-            </h1>
+            <div className="relative flex justify-center items-center mb-8 max-sm:mb-6">
+                <div className="absolute left-4 text-transparent text-lg font-bold max-lg:text-[#212121]">
+                    Men haqimda
+                </div>
+                <Title title="Men haqimda" />
+            </div>
 
             {/* Content: rasm va matn yonma-yon bo‘lishi uchun bitta flex konteyner ichida bo‘lishi kerak */}
             <div className="flex flex-col md:flex-row items-center gap-10">

@@ -3,9 +3,8 @@ import Content from "./content"
 
 export default function WorksSwiper() {
     return (
-        <MainLayout>
+        <MainLayout className="lg:mt-0 lg:py-16 py-8">
             <Content />
-            {/* Add your content here */}
         </MainLayout>
     )
 }

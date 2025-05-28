@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
 
@@ -30,9 +30,28 @@ const HeroSwiper = () => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
     const [selectedIndex, setSelectedIndex] = useState(0)
 
-    const scrollPrev = () => emblaApi?.scrollPrev()
-    const scrollNext = () => emblaApi?.scrollNext()
+    const autoplayRef = useRef<NodeJS.Timeout | null>(null)
 
+    const scrollPrev = useCallback(() => {
+        if (emblaApi) emblaApi.scrollPrev()
+    }, [emblaApi])
+
+    const scrollNext = useCallback(() => {
+        if (emblaApi) emblaApi.scrollNext()
+    }, [emblaApi])
+
+    // Auto-play every 3 seconds
+    useEffect(() => {
+        autoplayRef.current = setInterval(() => {
+            scrollNext()
+        }, 4000)
+
+        return () => {
+            if (autoplayRef.current) clearInterval(autoplayRef.current)
+        }
+    }, [scrollNext])
+
+    // Update selected index
     useEffect(() => {
         if (!emblaApi) return
 
@@ -42,21 +61,7 @@ const HeroSwiper = () => {
 
         emblaApi.on("select", onSelect)
         onSelect()
-
-        return () => {
-            emblaApi.off("select", onSelect)
-        }
     }, [emblaApi])
-
-    // useEffect(() => {
-    //     if (!emblaApi) return
-
-    //     const interval = setInterval(() => {
-    //         emblaApi.scrollNext()
-    //     }, 3000) // every 3 seconds
-
-    //     return () => clearInterval(interval) // Cleanup on unmount
-    // }, [emblaApi])
 
     return (
         <div className="relative w-full h-[clamp(343px,45vw,688px)]">
