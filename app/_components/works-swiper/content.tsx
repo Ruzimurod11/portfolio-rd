@@ -1,21 +1,13 @@
 "use client"
 
 import Title from "@/components/common/title"
-import WorkCard from "./work-card"
+import WorkCard, { IWork } from "./work-card"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 import { useCallback, useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 
-export interface IPark {
-    id: string
-    name: string
-    description: string
-    image: string
-    href: string
-}
-
-const staticWorks: IPark[] = [
+const staticWorks: IWork[] = [
     {
         id: "1",
         name: "Posts",

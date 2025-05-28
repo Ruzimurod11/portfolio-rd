@@ -8,12 +8,13 @@ export interface IWork {
     name: string
     description: string
     image: string
+    href: string
 }
 
 export default function WorkCard({ item }: { item: IWork }) {
     return (
         <Link
-            href={"#!"}
+            href={item.href}
             className="p-3 flex bg-[#ffffff] flex-col items-center w-[clamp(164px,20vw,auto)] rounded-3xl shadow-[0px_3px_10px_0px_#D5D5D540] max-md:p-2.5"
         >
             <div className="relative w-[clamp(18rem,18vw,19rem)] h-[clamp(15rem,16vw,18rem)] bg-white flex items-center justify-center rounded-t-[10px] overflow-hidden">
