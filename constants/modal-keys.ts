@@ -1,0 +1,6 @@
+export const ATTRACTION_DETAIL_MODAL = "attraction-detail-modal"
+export const IMAGE_VIEWER_MODAL = "image-viewer-modal"
+export const CONSTRUCTOR_DISCOUNT_SURPRISE = "constructor-discount-surprise"
+export const CONSTRUCTOR_DISCOUNT_SET_DATE = "constructor-discount-add-date"
+export const LOGIN_MODAL = "login-modal"
+export const NOTIFICATION_MODAL = "notification-modal"
