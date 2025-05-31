@@ -6,6 +6,7 @@ import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 import { useCallback, useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
+import ClientTranslate from "@/components/client-translate"
 
 const staticWorks: IWork[] = [
     {
@@ -100,9 +101,9 @@ const Content = () => {
         <div>
             <div className="relative flex justify-center items-center mb-8 max-sm:mb-6">
                 <div className="absolute left-4 text-transparent text-lg font-bold max-lg:text-[#212121]">
-                    Ishlarim
+                    <ClientTranslate translationKey="works" />
                 </div>
-                <Title title="Ishlarim" />
+                <Title title="works" />
             </div>
 
             <div className="overflow-hidden mt-6" ref={emblaRef}>

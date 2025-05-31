@@ -1,3 +1,4 @@
+import ClientTranslate from "@/components/client-translate"
 import Title from "@/components/common/title"
 import Image from "next/image"
 import Link from "next/link"
@@ -9,9 +10,9 @@ export default function AboutPage() {
             {/* Title */}
             <div className="relative flex justify-center items-center mb-8 max-sm:mb-6">
                 <div className="absolute left-4 text-transparent text-lg font-bold max-lg:text-[#212121]">
-                    Men haqimda
+                    <ClientTranslate translationKey="aboutMe" />
                 </div>
-                <Title title="Men haqimda" />
+                <Title title="aboutMe" />
             </div>
 
             {/* Content: rasm va matn yonma-yon bo‘lishi uchun bitta flex konteyner ichida bo‘lishi kerak */}
@@ -40,24 +41,22 @@ export default function AboutPage() {
                 {/* Description */}
                 <div className="flex-1 space-y-6">
                     <p className="text-gray-700 text-lg leading-7">
-                        Salom! Men{" "}
+                        <ClientTranslate translationKey="hello" />{" "}
                         <span className="font-semibold text-purple-600">
-                            Frontend Dasturchiman
+                            <ClientTranslate translationKey="frontendDev" />
                         </span>{" "}
-                        — foydalanuvchilar uchun qulay, zamonaviy va estetik
-                        interfeyslar yaratishga ixtisoslashganman.
+                        — <ClientTranslate translationKey="forUsers" />
                     </p>
 
                     <p className="text-gray-700 text-lg leading-7">
                         <strong className="text-purple-600">
-                            Mening texnologiyalarim:
+                            <ClientTranslate translationKey="myTechnologies" />
                         </strong>{" "}
                         React, Next.js, TypeScript, Tailwind CSS, Framer Motion
                     </p>
 
                     <p className="text-gray-700 text-lg leading-7">
-                        Har bir loyiha uchun minimalistik dizayn va maksimal
-                        foydalanuvchi tajribasiga e'tibor beraman.
+                        <ClientTranslate translationKey="forEachProject" />
                     </p>
 
                     {/* Resume & Contact */}
@@ -67,13 +66,13 @@ export default function AboutPage() {
                             target="_blank"
                             className="px-5 py-2.5 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 transition"
                         >
-                            CV-ni yuklab olish
+                            <ClientTranslate translationKey="downloadCV" />
                         </Link>
                         <Link
                             href="#contact"
                             className="px-5 py-2.5 border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-50 transition"
                         >
-                            Bog‘lanish
+                            <ClientTranslate translationKey="contacts" />
                         </Link>
                     </div>
                 </div>
@@ -82,28 +81,33 @@ export default function AboutPage() {
             {/* Qo‘shimcha ko‘nikmalar — alohida bo‘lim */}
             <div className="bg-purple-50 p-5 rounded-lg shadow-inner mt-16 max-w-4xl mx-auto">
                 <h2 className="text-2xl font-semibold text-purple-700 mb-3">
-                    Qo‘shimcha ko‘nikmalarim
+                    <ClientTranslate translationKey="anySkills" />
                 </h2>
                 <ul className="list-disc list-inside text-gray-700 space-y-2">
                     <li>
-                        <strong>Responsive sayt yaratish:</strong> Har qanday
-                        qurilmada mukammal ko‘rinish va ishlash uchun mobil va
-                        desktop dizaynlarni yarataman.
+                        <strong>
+                            <ClientTranslate translationKey="createSite" />
+                        </strong>{" "}
+                        <ClientTranslate translationKey="inAllDevices" />
                     </li>
                     <li>
-                        <strong>Jamoaviy ishlash:</strong> Git va GitHub orqali
-                        kodni boshqarish, code review jarayonlarida ishtirok
-                        etish, va samarali hamkorlik qilish.
+                        <strong>
+                            <ClientTranslate translationKey="teamWork" />
+                        </strong>{" "}
+                        <ClientTranslate translationKey="codeInTeam" />
                     </li>
                     <li>
-                        <strong>UI/UX dizayn tushunchalari:</strong>{" "}
-                        Foydalanuvchi ehtiyojlarini tushunib, qulay va intuitiv
-                        interfeyslar yarataman.
+                        <strong>
+                            {" "}
+                            <ClientTranslate translationKey="knowUI" />{" "}
+                        </strong>{" "}
+                        <ClientTranslate translationKey="createUnique" />
                     </li>
                     <li>
-                        <strong>Performance optimizatsiyasi:</strong> Sayt
-                        tezligini oshirish va resurslarni samarali boshqarishga
-                        e'tibor beraman.
+                        <strong>
+                            <ClientTranslate translationKey="optimizationPer" />
+                        </strong>{" "}
+                        <ClientTranslate translationKey="speedSite" />
                     </li>
                 </ul>
             </div>

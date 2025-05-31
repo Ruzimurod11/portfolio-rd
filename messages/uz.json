@@ -1,3 +1,27 @@
 {
-    "title": "Salom dunyo!"
+    "title": "Salom dunyo!",
+    "home": "Bosh sahifa",
+    "aboutMe": "Men haqimda",
+    "projects": "Loyihalar",
+    "contacts": "Bog'lanish",
+    "works": "Ishlarim",
+    "hello": "Salom! Men",
+    "frontendDev": "Frontend Dasturchiman",
+    "forUsers": "foydalanuvchilar uchun qulay, zamonaviy va estetik interfeyslar yaratishga ixtisoslashganman.",
+    "myTechnologies": "Mening texnologiyalarim:",
+    "forEachProject": "Har bir loyiha uchun minimalistik dizayn va maksimal foydalanuvchi tajribasiga e'tibor beraman.",
+    "downloadCV": "CV-ni yuklab olish",
+    "anySkills": "Qo‘shimcha ko‘nikmalarim",
+    "createSite": "Responsive sayt yaratish:",
+    "inAllDevices": "Har qanday qurilmada mukammal ko‘rinish va ishlash uchun mobil va desktop dizaynlarni yarataman.",
+    "teamWork": "Jamoaviy ishlash:",
+    "codeInTeam": "Git va GitHub orqali kodni boshqarish, code review jarayonlarida ishtirok etish, va samarali hamkorlik qilish.",
+    "knowUI": "UI/UX dizayn tushunchalari:",
+    "createUnique": "Foydalanuvchi ehtiyojlarini tushunib, qulay va intuitiv interfeyslar yarataman.",
+    "optimizationPer": "Performance optimizatsiyasi:",
+    "speedSite": "Sayt tezligini oshirish va resurslarni samarali boshqarishga e'tibor beraman.",
+    "profPortfolio": "Professional portfolio vebsayti — ishonchli frontend xizmatlari uchun.",
+    "navigation": "Sayt havolalari",
+    "socialNetworks": "Ijtimoiy tarmoqlar",
+    "allRights": "Barcha huquqlar himoyalangan."
 }

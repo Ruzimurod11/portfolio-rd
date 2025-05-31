@@ -28,37 +28,34 @@ const Header = () => {
                             href="/"
                             className="text-2xl font-bold text-purple-600 dark:text-purple-400"
                         >
-                            Frontend Dasturchi
+                            Ruzimurod
                         </Link>
 
                         {/* Desktop Links */}
                         <nav className="hidden md:flex gap-6 text-gray-700">
-                            <span>
-                                <ClientTranslate translationKey="title" />
-                            </span>
                             <Link
                                 href="#home"
                                 className="hover:text-purple-500"
                             >
-                                Bosh sahifa
+                                <ClientTranslate translationKey="home" />
                             </Link>
                             <Link
                                 href="#about"
                                 className="hover:text-purple-500"
                             >
-                                Men haqimda
+                                <ClientTranslate translationKey="aboutMe" />
                             </Link>
                             <Link
                                 href="#projects"
                                 className="hover:text-purple-500"
                             >
-                                Loyihalar
+                                <ClientTranslate translationKey="projects" />
                             </Link>
                             <Link
                                 href="#contact"
                                 className="hover:text-purple-500"
                             >
-                                Bog‘lanish
+                                <ClientTranslate translationKey="contacts" />
                             </Link>
                         </nav>
 
@@ -86,7 +83,7 @@ const Header = () => {
                         href="/"
                         className="text-2xl font-bold text-purple-600 dark:text-purple-400"
                     >
-                        Frontend Dasturchi
+                        Ruzimurod
                     </Link>
                     <button
                         onClick={toggleMenu}
@@ -112,28 +109,28 @@ const Header = () => {
                             onClick={closeMenu}
                             className="hover:text-purple-500"
                         >
-                            Bosh sahifa
+                            <ClientTranslate translationKey="home" />
                         </Link>
                         <Link
                             href="#about"
                             onClick={closeMenu}
                             className="hover:text-purple-500"
                         >
-                            Men haqimda
+                            <ClientTranslate translationKey="aboutMe" />
                         </Link>
                         <Link
                             href="#projects"
                             onClick={closeMenu}
                             className="hover:text-purple-500"
                         >
-                            Loyihalar
+                            <ClientTranslate translationKey="projects" />
                         </Link>
                         <Link
                             href="#contact"
                             onClick={closeMenu}
                             className="hover:text-purple-500"
                         >
-                            Bog‘lanish
+                            <ClientTranslate translationKey="contacts" />
                         </Link>
                     </div>
                 </nav>

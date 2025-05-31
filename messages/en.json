@@ -1,3 +1,27 @@
 {
-    "title": "Hello world!"
+    "title": "Hello world!",
+    "home": "Home",
+    "aboutMe": "About Me",
+    "projects": "Projects",
+    "contacts": "Contacts",
+    "works": "My Works",
+    "hello": "Hello! I am",
+    "frontendDev": "Frontend Developer",
+    "forUsers": "specialize in creating user-friendly, modern, and aesthetic interfaces.",
+    "myTechnologies": "My technologies:",
+    "forEachProject": "For each project, I focus on minimalist design and maximum user experience.",
+    "downloadCV": "Download CV",
+    "anySkills": "Additional skills",
+    "createSite": "Creating responsive websites:",
+    "inAllDevices": "I design mobile and desktop layouts for perfect appearance and performance on all devices.",
+    "teamWork": "Teamwork:",
+    "codeInTeam": "Manage code with Git and GitHub, participate in code reviews, and collaborate effectively.",
+    "knowUI": "UI/UX design concepts:",
+    "createUnique": "Understand user needs and create convenient and intuitive interfaces.",
+    "optimizationPer": "Performance optimization:",
+    "speedSite": "Focus on improving site speed and efficient resource management.",
+    "profPortfolio": "Professional portfolio website — reliable frontend services.",
+    "navigation": "Site navigation",
+    "socialNetworks": "Social networks",
+    "allRights": "All rights reserved."
 }

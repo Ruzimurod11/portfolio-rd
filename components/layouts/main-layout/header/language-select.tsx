@@ -42,8 +42,16 @@ const SelectLanguage = () => {
 
     return (
         <DropdownMenu modal={false}>
-            <DropdownMenuTrigger className="flex items-center gap-1 w-14 shadow-none border-none px-2 focus:ring-0 focus:outline-none focus-visible:ring-0 data-[state=open]:ring-0 data-[state=open]:outline-none">
-                {currentLang.label}
+            <DropdownMenuTrigger className="flex items-center gap-1 w-20 shadow-none border-none px-2 focus:ring-0 focus:outline-none focus-visible:ring-0 data-[state=open]:ring-0 data-[state=open]:outline-none">
+                {/* Bayroq va til nomi */}
+                <Image
+                    src={currentLang.scr}
+                    alt={currentLang.label}
+                    width={16}
+                    height={16}
+                    className="rounded-sm"
+                />
+                <span>{currentLang.label}</span>
                 <ChevronDown size={16} />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -62,7 +70,7 @@ const SelectLanguage = () => {
                                 <Image
                                     width={16}
                                     height={16}
-                                    src={item.scr}
+                                    src={item.scr} // shu yerda src
                                     alt={item.label}
                                     className="w-4 h-4"
                                 />

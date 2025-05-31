@@ -1,5 +1,6 @@
 "use client"
 
+import ClientTranslate from "@/components/client-translate"
 import Link from "next/link"
 import { FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa"
 
@@ -11,18 +12,17 @@ const Footer = () => {
                     {/* Site Name / Logo */}
                     <div>
                         <h2 className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                            Frontend Dasturchi
+                            Ruzimurod
                         </h2>
                         <p className="mt-2 text-sm text-gray-600">
-                            Professional portfolio vebsayti — ishonchli frontend
-                            xizmatlari uchun.
+                            <ClientTranslate translationKey="profPortfolio" />
                         </p>
                     </div>
 
                     {/* Useful Links */}
                     <div>
                         <h3 className="text-lg font-semibold mb-4">
-                            Navigatsiya
+                            <ClientTranslate translationKey="navigation" />
                         </h3>
                         <ul className="space-y-2 text-sm">
                             <li>
@@ -30,7 +30,7 @@ const Footer = () => {
                                     href="#home"
                                     className="hover:text-purple-500"
                                 >
-                                    Bosh sahifa
+                                    <ClientTranslate translationKey="home" />
                                 </Link>
                             </li>
                             <li>
@@ -38,7 +38,7 @@ const Footer = () => {
                                     href="#about"
                                     className="hover:text-purple-500"
                                 >
-                                    Men haqimda
+                                    <ClientTranslate translationKey="aboutMe" />
                                 </Link>
                             </li>
                             <li>
@@ -46,7 +46,7 @@ const Footer = () => {
                                     href="#projects"
                                     className="hover:text-purple-500"
                                 >
-                                    Loyihalar
+                                    <ClientTranslate translationKey="projects" />
                                 </Link>
                             </li>
                             <li>
@@ -54,7 +54,7 @@ const Footer = () => {
                                     href="#contact"
                                     className="hover:text-purple-500"
                                 >
-                                    Bog‘lanish
+                                    <ClientTranslate translationKey="contacts" />
                                 </Link>
                             </li>
                         </ul>
@@ -63,7 +63,7 @@ const Footer = () => {
                     {/* Social Links */}
                     <div>
                         <h3 className="text-lg font-semibold mb-4">
-                            Ijtimoiy tarmoqlar
+                            <ClientTranslate translationKey="socialNetworks" />
                         </h3>
                         <div className="flex gap-4 text-xl text-gray-600">
                             <a
@@ -96,8 +96,8 @@ const Footer = () => {
 
                 {/* Copyright */}
                 <div className="mt-10 text-center text-sm text-gray-500">
-                    © {new Date().getFullYear()} Frontend Dasturchi. Barcha
-                    huquqlar himoyalangan.
+                    © {new Date().getFullYear()} Ruzimurod.{" "}
+                    <ClientTranslate translationKey="allRights" />
                 </div>
             </div>
         </footer>
