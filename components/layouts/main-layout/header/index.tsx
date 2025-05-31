@@ -5,14 +5,10 @@ import { Menu, X } from "lucide-react" // hamburger & close icons
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import SelectLanguage from "./language-select"
-import { Button } from "@/components/ui/button"
 import ClientTranslate from "@/components/client-translate"
-import { useLoginModal } from "@/hooks/use-login-modal"
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false)
-
-    const { openLoginModal } = useLoginModal()
 
     const toggleMenu = () => setIsOpen(!isOpen)
     const closeMenu = () => setIsOpen(false)
@@ -63,7 +59,6 @@ const Header = () => {
                             <li className="cursor-pointer">
                                 <SelectLanguage />
                             </li>
-                            {/* <Button onClick={openLoginModal}></Button> */}
                         </ul>
 
                         {/* Hamburger Button */}
@@ -132,6 +127,11 @@ const Header = () => {
                         >
                             <ClientTranslate translationKey="contacts" />
                         </Link>
+                        <ul className="flex items-center gap-6 text-[#212121] text-lg font-medium">
+                            <li className="cursor-pointer">
+                                <SelectLanguage />
+                            </li>
+                        </ul>
                     </div>
                 </nav>
             </header>
