@@ -1,5 +1,6 @@
 "use client";
 
+import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Phone, Send } from "lucide-react";
 import Link from "next/link";
@@ -37,14 +38,18 @@ const contacts = [
 	},
 ];
 
-const container = {
+const container: Variants = {
 	hidden: { opacity: 0 },
 	show: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
-const item = {
+const item: Variants = {
 	hidden: { opacity: 0, x: -30 },
-	show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
+	show: {
+		opacity: 1,
+		x: 0,
+		transition: { duration: 0.5, ease: "easeOut" as const },
+	},
 };
 
 export default function Page() {
