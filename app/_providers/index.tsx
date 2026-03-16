@@ -1,11 +1,11 @@
-import { NextIntlClientProvider } from "next-intl"
-import { ModalProvider } from "./modal-provider"
-import React from "react"
+import { NextIntlClientProvider } from "next-intl";
+import type React from "react";
+import { ModalProvider } from "./modal-provider";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-    return (
-        <NextIntlClientProvider>
-            <ModalProvider>{children}</ModalProvider>
-        </NextIntlClientProvider>
-    )
+	return (
+		<NextIntlClientProvider>
+			<ModalProvider>{children}</ModalProvider>
+		</NextIntlClientProvider>
+	);
 }
