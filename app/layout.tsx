@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Providers from "./_providers";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
+import FallbackLoader from "@/components/fallback-loader";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -40,7 +41,7 @@ export default async function RootLayout({
 			<body
 				className={`${geologica.variable} ${geistSans.variable} ${geistMono.variable} antialiased font-sans bg-[#F5FAFF]`}
 			>
-				<Suspense>
+				<Suspense fallback={<FallbackLoader />}>
 					<Providers>
 						<NextTopLoader
 							color="#0019ff"
