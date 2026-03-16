@@ -1,9 +1,10 @@
 "use client";
 
+import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const container = {
+const container: Variants = {
 	hidden: { opacity: 0 },
 	show: {
 		opacity: 1,
@@ -11,9 +12,13 @@ const container = {
 	},
 };
 
-const item = {
+const item: Variants = {
 	hidden: { opacity: 0, y: 30 },
-	show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+	show: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.5, ease: "easeOut" as const },
+	},
 };
 
 export default function Page() {
