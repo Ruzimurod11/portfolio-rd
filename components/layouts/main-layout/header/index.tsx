@@ -2,11 +2,11 @@
 
 import { Menu, X } from "lucide-react"; // hamburger & close icons
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ClientTranslate from "@/components/client-translate";
 import { cn } from "@/lib/utils";
 import SelectLanguage from "./language-select";
-import { usePathname } from "next/navigation";
 
 const Header = () => {
 	const pathname = usePathname();
@@ -102,27 +102,16 @@ const Header = () => {
 					)}
 				>
 					<div className="flex flex-col px-4 py-6 gap-4">
-						<Link
-							href="/about"
-							onClick={closeMenu}
-							className="hover:text-purple-500"
-						>
-							<ClientTranslate translationKey="aboutMe" />
-						</Link>
-						<Link
-							href="/works"
-							onClick={closeMenu}
-							className="hover:text-purple-500"
-						>
-							<ClientTranslate translationKey="projects" />
-						</Link>
-						<Link
-							href="/contacts"
-							onClick={closeMenu}
-							className="hover:text-purple-500"
-						>
-							<ClientTranslate translationKey="contacts" />
-						</Link>
+						{navLinks.map(({ href, label }) => (
+							<Link
+								key={href}
+								href={href}
+								onClick={closeMenu}
+								className="hover:text-purple-500"
+							>
+								<ClientTranslate translationKey={label} />
+							</Link>
+						))}
 						<ul className="flex items-center gap-6 text-[#212121] text-lg font-medium">
 							<li className="cursor-pointer">
 								<SelectLanguage />
