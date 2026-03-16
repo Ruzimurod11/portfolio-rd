@@ -16,12 +16,12 @@ export default function AboutPage() {
 			</div>
 
 			{/* Content: rasm va matn yonma-yon bo‘lishi uchun bitta flex konteyner ichida bo‘lishi kerak */}
-			<div className="flex flex-col md:flex-row items-center gap-10">
-				{/* Profile Image */}
-				<ScrollReveal direction="left" className="mx-auto md:mx-0">
-					<div className="relative w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-purple-500 shadow-lg">
+			<ScrollReveal direction="right">
+				<div className="flex flex-col md:flex-row items-start gap-10">
+					{/* Profile Image */}
+					<div className="relative w-40 h-40 shrink-0 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-purple-500 shadow-lg mx-auto md:mx-0">
 						{/* Fire background GIF */}
-						<div className="absolute inset-0 z-0">
+						<div className="absolute inset-0 z-0 pointer-events-none">
 							<Image
 								src="/stars.gif"
 								alt="Fire background"
@@ -35,14 +35,12 @@ export default function AboutPage() {
 							src="https://avatars.githubusercontent.com/u/148287289?v=4"
 							alt="Frontend Developer"
 							fill
-							className="object-cover relative z-10 mix-blend-lighten"
+							className="object-cover z-10 mix-blend-lighten"
 						/>
 					</div>
-				</ScrollReveal>
 
-				{/* Description */}
-				<ScrollReveal direction="right" className="flex-1">
-					<div className="space-y-6">
+					{/* Description */}
+					<div className="flex-1 min-w-0 space-y-6">
 						<p className="text-gray-700 text-lg leading-7">
 							<ClientTranslate translationKey="hello" />{" "}
 							<span className="font-semibold text-purple-600">
@@ -63,14 +61,13 @@ export default function AboutPage() {
 						</p>
 
 						{/* Resume & Contact */}
-						<div className="mt-6 flex gap-4 flex-wrap">
-							<Link
-								href="/cv.pdf"
-								target="_blank"
+						<div className="mt-6 flex gap-4 flex-wrap relative z-10">
+							<a
+								href="./cv/cv.pdf"
 								className="px-5 py-2.5 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 transition"
 							>
 								<ClientTranslate translationKey="downloadCV" />
-							</Link>
+							</a>
 							<Link
 								href="#contact"
 								className="px-5 py-2.5 border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-50 transition"
@@ -79,8 +76,8 @@ export default function AboutPage() {
 							</Link>
 						</div>
 					</div>
-				</ScrollReveal>
-			</div>
+				</div>
+			</ScrollReveal>
 
 			{/* Qo‘shimcha ko‘nikmalar — alohida bo‘lim */}
 			<ScrollReveal direction="left">

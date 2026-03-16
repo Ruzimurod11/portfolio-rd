@@ -2,7 +2,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 
 type Props = {
 	children: React.ReactNode;
@@ -24,17 +23,16 @@ const ScrollReveal = ({
 	className,
 }: Props) => {
 	return (
-		<div className={cn("overflow-hidden", className)}>
-			<motion.div
-				initial="hidden"
-				whileInView="visible"
-				viewport={{ once: true, amount: 0.2 }}
-				transition={{ duration: 0.6, delay, ease: "easeOut" }}
-				variants={variants[direction]}
-			>
-				{children}
-			</motion.div>
-		</div>
+		<motion.div
+			className={className}
+			initial="hidden"
+			whileInView="visible"
+			viewport={{ once: true, amount: 0.2 }}
+			transition={{ duration: 0.6, delay, ease: "easeOut" }}
+			variants={variants[direction]}
+		>
+			{children}
+		</motion.div>
 	);
 };
 
