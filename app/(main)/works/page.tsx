@@ -1,5 +1,6 @@
 "use client";
 
+import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -62,7 +63,7 @@ const staticWorks = [
 	},
 ];
 
-const container = {
+const container: Variants = {
 	hidden: { opacity: 0 },
 	show: {
 		opacity: 1,
@@ -70,9 +71,13 @@ const container = {
 	},
 };
 
-const cardVariant = {
+const cardVariant: Variants = {
 	hidden: { opacity: 0, y: 40 },
-	show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+	show: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.5, ease: "easeOut" as const },
+	},
 };
 
 export default function Page() {
