@@ -6,12 +6,23 @@ import { useState } from "react";
 import ClientTranslate from "@/components/client-translate";
 import { cn } from "@/lib/utils";
 import SelectLanguage from "./language-select";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
+	const pathname = usePathname();
 	const [isOpen, setIsOpen] = useState(false);
+
+	const isActive = (path: string) => path === pathname;
 
 	const toggleMenu = () => setIsOpen(!isOpen);
 	const closeMenu = () => setIsOpen(false);
+
+	const navLinks = [
+		{ href: "/about", label: "aboutMe" },
+		{ href: "/works", label: "projects" },
+		{ href: "/contacts", label: "contacts" },
+	];
+
 	return (
 		<>
 			<header className="fixed top-0 left-0 right-0 z-50 bg-[#EDEEFE] basic-shadow px-5 max-lg:hidden">
@@ -29,18 +40,20 @@ const Header = () => {
 
 						{/* Desktop Links */}
 						<nav className="hidden md:flex gap-6 text-gray-700">
-							<Link href="/" className="hover:text-purple-500">
-								<ClientTranslate translationKey="home" />
-							</Link>
-							<Link href="/about" className="hover:text-purple-500">
-								<ClientTranslate translationKey="aboutMe" />
-							</Link>
-							<Link href="/works" className="hover:text-purple-500">
-								<ClientTranslate translationKey="projects" />
-							</Link>
-							<Link href="/contacts" className="hover:text-purple-500">
-								<ClientTranslate translationKey="contacts" />
-							</Link>
+							{navLinks.map(({ href, label }) => (
+								<Link
+									key={href}
+									href={href}
+									className={cn(
+										"hover:text-purple-500",
+										isActive(href)
+											? "text-purple-500 border-b-2 border-[#83109f]"
+											: "",
+									)}
+								>
+									<ClientTranslate translationKey={label} />
+								</Link>
+							))}
 						</nav>
 
 						<ul className="flex items-center gap-6 text-[#212121] text-lg font-medium">
@@ -89,13 +102,6 @@ const Header = () => {
 					)}
 				>
 					<div className="flex flex-col px-4 py-6 gap-4">
-						<Link
-							href="/"
-							onClick={closeMenu}
-							className="hover:text-purple-500"
-						>
-							<ClientTranslate translationKey="home" />
-						</Link>
 						<Link
 							href="/about"
 							onClick={closeMenu}
