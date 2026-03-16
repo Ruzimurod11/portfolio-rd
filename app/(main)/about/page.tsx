@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const container = {
 	hidden: { opacity: 0 },
@@ -26,10 +27,11 @@ export default function Page() {
 			>
 				{/* Avatar */}
 				<motion.div variants={item} className="flex justify-center">
-					<div className="w-24 h-24 rounded-full bg-purple-200 border-4 border-purple-500 overflow-hidden">
-						<img
+					<div className="relative w-24 h-24 rounded-full bg-purple-200 border-3 border-purple-500 overflow-hidden">
+						<Image
 							src="https://avatars.githubusercontent.com/u/148287289?v=4"
 							alt="avatar"
+							fill
 							className="w-full h-full object-cover"
 						/>
 					</div>
