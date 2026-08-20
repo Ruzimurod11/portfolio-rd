@@ -42,4 +42,6 @@ info.txt
 *.tsbuildinfo
 next-env.d.ts
 
-CLAUDE.md*
+# claude code — personal, not committed
+.claude/settings.local.json
+CLAUDE.local.md
