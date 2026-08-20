@@ -7,8 +7,8 @@ afterEach(() => {
     cleanup()
 })
 
-// jsdom does not implement these, but framer-motion (whileInView), embla-carousel
-// and the radix dropdown all blow up on render without them.
+// jsdom does not implement these, but framer-motion (whileInView) and the radix
+// dropdown both blow up on render without them.
 class NoopObserver {
     observe() {}
     unobserve() {}
@@ -33,12 +33,6 @@ Object.defineProperty(window, "matchMedia", {
         removeEventListener: () => {},
         dispatchEvent: () => false,
     }),
-})
-
-// @smastrom/react-rating measures its star SVG on mount; jsdom has no SVG layout.
-Object.defineProperty(SVGElement.prototype, "getBBox", {
-    writable: true,
-    value: () => ({ x: 0, y: 0, width: 0, height: 0 }),
 })
 
 // next/image forwards next-only props such as `fill` / `priority` to the DOM in

@@ -1,32 +1,21 @@
 @import "tailwindcss";
 
-body {
-    background: var(--background);
-    color: var(--foreground);
-    font-family: Poppins, Helvetica, sans-serif;
-}
+/* next-themes writes `class="dark"` on <html>, so the dark variant has to key
+   off that class instead of the media query tailwind v4 defaults to. */
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
-    --font-sans: var(--font-geologica), var(--font-geist-sans), ui-sans-serif,
-        system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-        "Segoe UI Symbol", "Noto Color Emoji";
+    --color-surface: var(--surface);
+    --color-surface-hover: var(--surface-hover);
+
+    --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
     --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
         Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --color-sidebar-ring: var(--sidebar-ring);
-    --color-sidebar-border: var(--sidebar-border);
-    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-    --color-sidebar-accent: var(--sidebar-accent);
-    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-    --color-sidebar-primary: var(--sidebar-primary);
-    --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar: var(--sidebar);
-    --color-chart-5: var(--chart-5);
-    --color-chart-4: var(--chart-4);
-    --color-chart-3: var(--chart-3);
-    --color-chart-2: var(--chart-2);
-    --color-chart-1: var(--chart-1);
+
     --color-ring: var(--ring);
     --color-input: var(--input);
     --color-border: var(--border);
@@ -46,62 +35,233 @@ body {
 
     /* custom colors */
     --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
     --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
     --color-info: var(--info);
-    --color-main-bg: var(--main-bg);
-    --color-b4: var(--b4);
+    --color-info-foreground: var(--info-foreground);
 
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
     --radius-xl: calc(var(--radius) + 4px);
+    --radius-2xl: calc(var(--radius) + 12px);
 }
 
+/* light — tinted paper ground, white cards lifted off it, one violet accent */
 :root {
-    --radius: 0.625rem;
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.25 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.25 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.25 0 0);
-    --primary: oklch(0.45 0.2099 317.94);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.8 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.87 0.0093 258.34);
-    --input: oklch(0.87 0.0093 258.34);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.646 0.222 41.116);
-    --chart-2: oklch(0.6 0.118 184.704);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.25 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --radius: 0.75rem;
 
-    /* custom colors*/
-    --success: oklch(0.723 0.219 149.579);
-    --success-foreground: oklch(0.982 0.018 155.826);
-    --warning: oklch(0.795 0.184 86.047);
-    --warning-foreground: oklch(0.421 0.095 57.708);
-    --info: oklch(0.623 0.214 259.815);
-    --info-foreground: oklch(0.97 0.014 254.604);
-    --main-bg: oklch(0.98 0.0085 247.91);
-    --b4: oklch(0.67 0.0137 255.54);
+    /* the ground is deliberately NOT white: cards are, and the gap between the
+       two is what gives light mode its depth */
+    --background: oklch(0.971 0.004 286);
+    --foreground: oklch(0.17 0.014 286);
+    --surface: oklch(1 0 0);
+    --surface-hover: oklch(0.985 0.003 286);
+
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.17 0.014 286);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.17 0.014 286);
+
+    --primary: oklch(0.52 0.21 288);
+    --primary-foreground: oklch(0.99 0 0);
+    --secondary: oklch(0.945 0.005 286);
+    --secondary-foreground: oklch(0.22 0.012 286);
+    --muted: oklch(0.945 0.005 286);
+    --muted-foreground: oklch(0.455 0.016 286);
+    --accent: oklch(0.945 0.005 286);
+    --accent-foreground: oklch(0.22 0.012 286);
+    --destructive: oklch(0.55 0.22 27);
+
+    --border: oklch(0.17 0.014 286 / 12%);
+    --input: oklch(0.17 0.014 286 / 16%);
+    --ring: oklch(0.52 0.21 288);
+
+    /* darker than the dark-mode pair on purpose — these are read as text on
+       white in the hero code card */
+    --success: oklch(0.55 0.15 150);
+    --success-foreground: oklch(0.99 0 0);
+    --warning: oklch(0.62 0.14 70);
+    --warning-foreground: oklch(0.99 0 0);
+    --info: oklch(0.55 0.18 255);
+    --info-foreground: oklch(0.99 0 0);
+
+    --glow-a: oklch(0.52 0.21 288 / 16%);
+    --glow-b: oklch(0.62 0.16 255 / 12%);
+    --grid-line: oklch(0.17 0.014 286 / 5%);
+
+    /* elevation only exists in light mode; dark separates surfaces by
+       lightness instead, so both shadows are neutralised in .dark below */
+    --shadow-card: 0 1px 2px oklch(0.17 0.014 286 / 6%),
+        0 10px 24px -14px oklch(0.17 0.014 286 / 14%);
+    --shadow-card-hover: 0 2px 4px oklch(0.17 0.014 286 / 6%),
+        0 26px 50px -24px oklch(0.52 0.21 288 / 40%);
+}
+
+/* dark — near-black, the same violet accent */
+.dark {
+    --background: oklch(0.175 0.008 285);
+    --foreground: oklch(0.97 0.004 285);
+    --surface: oklch(0.222 0.009 285);
+    --surface-hover: oklch(0.255 0.01 285);
+
+    --card: oklch(0.222 0.009 285);
+    --card-foreground: oklch(0.97 0.004 285);
+    --popover: oklch(0.222 0.009 285);
+    --popover-foreground: oklch(0.97 0.004 285);
+
+    --primary: oklch(0.66 0.19 287);
+    --primary-foreground: oklch(0.16 0.02 287);
+    --secondary: oklch(0.26 0.011 285);
+    --secondary-foreground: oklch(0.97 0.004 285);
+    --muted: oklch(0.24 0.01 285);
+    --muted-foreground: oklch(0.68 0.012 285);
+    --accent: oklch(0.27 0.014 285);
+    --accent-foreground: oklch(0.97 0.004 285);
+    --destructive: oklch(0.65 0.2 25);
+
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.66 0.19 287);
+
+    --success: oklch(0.7 0.16 150);
+    --success-foreground: oklch(0.16 0.03 150);
+    --warning: oklch(0.78 0.15 76);
+    --warning-foreground: oklch(0.2 0.05 76);
+    --info: oklch(0.68 0.15 254);
+    --info-foreground: oklch(0.16 0.03 254);
+
+    --glow-a: oklch(0.66 0.19 287 / 30%);
+    --glow-b: oklch(0.7 0.15 200 / 18%);
+    --grid-line: oklch(1 0 0 / 6%);
+
+    --shadow-card: 0 0 #0000;
+    --shadow-card-hover: 0 18px 40px -24px var(--glow-a);
+}
+
+@layer base {
+    * {
+        border-color: var(--border);
+    }
+
+    body {
+        background: var(--background);
+        color: var(--foreground);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+        background: var(--primary);
+        color: var(--primary-foreground);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+
+    /* headings read as one voice across every page */
+    h1,
+    h2,
+    h3 {
+        letter-spacing: -0.03em;
+        text-wrap: balance;
+    }
+}
+
+@layer utilities {
+    /* faint blueprint grid — the base texture behind hero and CTA sections */
+    .bg-grid {
+        background-image: linear-gradient(
+                to right,
+                var(--grid-line) 1px,
+                transparent 1px
+            ),
+            linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+        background-size: 64px 64px;
+    }
+
+    /* soft accent light, used as an absolutely positioned decorative layer */
+    .bg-glow {
+        background: radial-gradient(
+                60% 60% at 20% 0%,
+                var(--glow-a) 0%,
+                transparent 70%
+            ),
+            radial-gradient(50% 50% at 85% 20%, var(--glow-b) 0%, transparent 70%);
+    }
+
+    .mask-fade-x {
+        mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 12%,
+            black 88%,
+            transparent
+        );
+    }
+
+    /* fades only the trailing edge, so the first item stays fully readable */
+    .mask-fade-r {
+        mask-image: linear-gradient(to right, black 85%, transparent);
+    }
+
+    .no-scrollbar {
+        scrollbar-width: none;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .mask-fade-b {
+        mask-image: linear-gradient(to bottom, black 55%, transparent);
+    }
+
+    .animate-marquee {
+        animation: marquee 40s linear infinite;
+    }
+
+    .animate-pulse-dot {
+        animation: pulse-dot 2s ease-in-out infinite;
+    }
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes pulse-dot {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(0.85);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 #nprogress .bar {
-  background: linear-gradient(to right, #0019ff, #6ee5c2) !important;
+    background: var(--primary) !important;
 }

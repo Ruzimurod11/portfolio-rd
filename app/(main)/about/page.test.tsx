@@ -1,32 +1,54 @@
-import { render, screen } from "@testing-library/react"
+import { screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
+import { renderWithIntl, uz } from "@/tests/utils"
 import AboutPage from "./page"
 
 describe("About page", () => {
-    it("renders name and role", () => {
-        render(<AboutPage />)
+    it("renders the role as the page heading", () => {
+        renderWithIntl(<AboutPage />)
 
         expect(
-            screen.getByRole("heading", { name: "Ruzimurod" }),
+            screen.getByRole("heading", { level: 1, name: uz.frontendDev }),
         ).toBeInTheDocument()
-        expect(screen.getByText("Frontend Developer")).toBeInTheDocument()
     })
 
-    it("renders the avatar with an alt text", () => {
-        render(<AboutPage />)
+    it("renders the avatar and the name", () => {
+        renderWithIntl(<AboutPage />)
 
-        expect(screen.getByAltText("avatar")).toBeInTheDocument()
+        expect(screen.getByAltText("Ruzimurod Doniev")).toBeInTheDocument()
+        expect(screen.getByText("Ruzimurod Doniev")).toBeInTheDocument()
     })
 
-    it("points the CV button at the pdf and the contact button at the anchor", () => {
-        render(<AboutPage />)
+    it("points the CV button at the pdf and the contact button at /contacts", () => {
+        renderWithIntl(<AboutPage />)
 
         expect(
-            screen.getByRole("link", { name: "CV yuklab olish" }),
-        ).toHaveAttribute("href", "./cv/cv.pdf")
-        expect(screen.getByRole("link", { name: "Bog'lanish" })).toHaveAttribute(
+            screen.getByRole("link", { name: uz.downloadCV }),
+        ).toHaveAttribute("href", "/cv/cv.pdf")
+        expect(screen.getByRole("link", { name: uz.contacts })).toHaveAttribute(
             "href",
-            "#contact",
+            "/contacts",
         )
+    })
+
+    it("lists every skill", () => {
+        renderWithIntl(<AboutPage />)
+
+        for (const key of [
+            uz.createSite,
+            uz.teamWork,
+            uz.knowUI,
+            uz.optimizationPer,
+        ]) {
+            expect(
+                screen.getByRole("heading", { level: 3, name: key }),
+            ).toBeInTheDocument()
+        }
+    })
+
+    it("hides the experience section while constants/experience.ts is empty", () => {
+        renderWithIntl(<AboutPage />)
+
+        expect(screen.queryByText(uz.experience)).not.toBeInTheDocument()
     })
 })

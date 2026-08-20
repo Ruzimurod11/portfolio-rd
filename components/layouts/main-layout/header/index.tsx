@@ -1,126 +1,159 @@
 "use client";
 
-import { Menu, X } from "lucide-react"; // hamburger & close icons
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import ClientTranslate from "@/components/client-translate";
+import ThemeToggle from "@/components/common/theme-toggle";
+import { navLinks } from "@/constants/contacts";
 import { cn } from "@/lib/utils";
 import SelectLanguage from "./language-select";
+
+const subscribeToScroll = (onChange: () => void) => {
+	window.addEventListener("scroll", onChange, { passive: true });
+	return () => window.removeEventListener("scroll", onChange);
+};
 
 const Header = () => {
 	const pathname = usePathname();
 	const [isOpen, setIsOpen] = useState(false);
 
-	const isActive = (path: string) => path === pathname;
+	// closing the menu on navigation is derived state, so it is adjusted during
+	// render rather than in an effect (same pattern as the modal provider)
+	const [lastPath, setLastPath] = useState(pathname);
+	if (lastPath !== pathname) {
+		setLastPath(pathname);
+		if (isOpen) setIsOpen(false);
+	}
 
-	const toggleMenu = () => setIsOpen(!isOpen);
-	const closeMenu = () => setIsOpen(false);
+	// useSyncExternalStore keeps the SSR value (false) and the first client
+	// render in agreement without a mount effect
+	const isScrolled = useSyncExternalStore(
+		subscribeToScroll,
+		() => window.scrollY > 8,
+		() => false,
+	);
 
-	const navLinks = [
-		{ href: "/about", label: "aboutMe" },
-		{ href: "/works", label: "projects" },
-		{ href: "/contacts", label: "contacts" },
-	];
+	useEffect(() => {
+		if (!isOpen) return;
+
+		const onKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape") setIsOpen(false);
+		};
+
+		document.addEventListener("keydown", onKeyDown);
+		document.body.style.overflow = "hidden";
+
+		return () => {
+			document.removeEventListener("keydown", onKeyDown);
+			document.body.style.overflow = "";
+		};
+	}, [isOpen]);
 
 	return (
-		<>
-			<header className="fixed top-0 left-0 right-0 z-50 bg-[#EDEEFE] basic-shadow px-5 max-lg:hidden">
-				<div className="absolute top-0 -right-[46.813rem] w-[92.52rem] h-[5.438rem] origin-top-left rotate-[0.80deg] opacity-10 bg-gradient-to-r from-[#0019ff] to-[#6ee5c2] blur-[49.50px] pointer-events-none" />
-				<div className="absolute top-[1.688rem] -left-[6.75rem] w-[60.25rem] h-[3.375rem] opacity-10 bg-gradient-to-r from-[#ffc73a] via-[#ff008a] to-[#6100ff] blur-[62px] pointer-events-none" />
-				<main className="py-5 shadow-[0px_3px_12px_0px_rgba(175,173,173,0.14)]">
-					{/* Logo */}
-					<div className="max-w-7xl w-full h-10 flex justify-between gap-5 items-center mx-auto">
-						<Link
-							href="/"
-							className="text-2xl font-bold text-purple-600 dark:text-purple-400"
-						>
-							Ruzimurod
-						</Link>
-
-						{/* Desktop Links */}
-						<nav className="hidden md:flex gap-6 text-gray-700">
-							{navLinks.map(({ href, label }) => (
-								<Link
-									key={href}
-									href={href}
-									className={cn(
-										"hover:text-purple-500",
-										isActive(href)
-											? "text-purple-500 border-b-2 border-[#83109f]"
-											: "",
-									)}
-								>
-									<ClientTranslate translationKey={label} />
-								</Link>
-							))}
-						</nav>
-
-						<ul className="flex items-center gap-6 text-[#212121] text-lg font-medium">
-							<li className="cursor-pointer">
-								<SelectLanguage />
-							</li>
-						</ul>
-
-						{/* Hamburger Button */}
-						<button
-							type="button"
-							className="md:hidden text-gray-700"
-							onClick={toggleMenu}
-						>
-							{isOpen ? <X size={28} /> : <Menu size={28} />}
-						</button>
-					</div>
-				</main>
-			</header>
-			{/* Mobile Menu */}
-			<header className="fixed top-0 left-0 right-0 z-50 w-full bg-[#EDEEFE] basic-shadow lg:hidden">
-				<div className="w-full flex items-center justify-between px-4 py-4">
-					<Link
-						href="/"
-						className="text-2xl font-bold text-purple-600 dark:text-purple-400"
-					>
-						Ruzimurod
-					</Link>
-					<button
-						type="button"
-						onClick={toggleMenu}
-						className="text-gray-700"
-						aria-label="Toggle Menu"
-					>
-						{isOpen ? <X size={28} /> : <Menu size={28} />}
-					</button>
-				</div>
-
-				{/* Mobile Nav */}
-				<nav
-					className={cn(
-						"flex px-4 flex-col gap-4 text-gray-800 text-base font-medium transition-all duration-500",
-						isOpen
-							? "max-h-[300px] opacity-100"
-							: "max-h-0 overflow-hidden opacity-0",
-					)}
+		<header
+			className={cn(
+				"sticky top-0 z-50 w-full transition-colors duration-300",
+				isScrolled || isOpen
+					? "border-b border-border bg-background/80 backdrop-blur-xl"
+					: "border-b border-transparent",
+			)}
+		>
+			<div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 xl:px-0">
+				<Link
+					href="/"
+					className="text-lg font-semibold tracking-tight"
+					aria-label="Ruzimurod — home"
 				>
-					<div className="flex flex-col px-4 py-6 gap-4">
-						{navLinks.map(({ href, label }) => (
+					Ruzimurod<span className="text-primary">.</span>
+				</Link>
+
+				<nav className="hidden items-center gap-1 md:flex">
+					{navLinks.map(({ href, label }) => {
+						const isActive = pathname === href;
+						return (
 							<Link
 								key={href}
 								href={href}
-								onClick={closeMenu}
-								className="hover:text-purple-500"
+								className={cn(
+									"relative rounded-full px-4 py-2 text-sm transition-colors",
+									isActive
+										? "text-foreground"
+										: "text-muted-foreground hover:text-foreground",
+								)}
 							>
-								<ClientTranslate translationKey={label} />
+								{isActive && (
+									<motion.span
+										layoutId="nav-pill"
+										className="absolute inset-0 rounded-full bg-surface-hover ring-1 ring-border"
+										transition={{
+											type: "spring",
+											stiffness: 380,
+											damping: 32,
+										}}
+									/>
+								)}
+								<span className="relative z-10">
+									<ClientTranslate translationKey={label} />
+								</span>
 							</Link>
-						))}
-						<ul className="flex items-center gap-6 text-[#212121] text-lg font-medium">
-							<li className="cursor-pointer">
-								<SelectLanguage />
-							</li>
-						</ul>
-					</div>
+						);
+					})}
 				</nav>
-			</header>
-		</>
+
+				<div className="flex items-center gap-2">
+					<SelectLanguage />
+					<ThemeToggle />
+					<button
+						type="button"
+						onClick={() => setIsOpen((open) => !open)}
+						aria-label="Toggle menu"
+						aria-expanded={isOpen}
+						className="grid size-9 cursor-pointer place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:text-foreground md:hidden"
+					>
+						{isOpen ? <X size={16} /> : <Menu size={16} />}
+					</button>
+				</div>
+			</div>
+
+			<AnimatePresence>
+				{isOpen && (
+					<motion.nav
+						initial={{ opacity: 0, y: -8 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -8 }}
+						transition={{ duration: 0.2, ease: "easeOut" }}
+						className="border-t border-border bg-background/95 backdrop-blur-xl md:hidden"
+					>
+						<ul className="mx-auto flex max-w-7xl flex-col px-4 py-2">
+							{navLinks.map(({ href, label }, index) => (
+								<motion.li
+									key={href}
+									initial={{ opacity: 0, x: -12 }}
+									animate={{ opacity: 1, x: 0 }}
+									transition={{ delay: 0.04 * index, duration: 0.2 }}
+								>
+									<Link
+										href={href}
+										onClick={() => setIsOpen(false)}
+										className={cn(
+											"block border-b border-border py-4 text-base last:border-b-0",
+											pathname === href
+												? "text-primary"
+												: "text-muted-foreground",
+										)}
+									>
+										<ClientTranslate translationKey={label} />
+									</Link>
+								</motion.li>
+							))}
+						</ul>
+					</motion.nav>
+				)}
+			</AnimatePresence>
+		</header>
 	);
 };
 

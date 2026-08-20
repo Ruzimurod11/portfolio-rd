@@ -1,34 +1,28 @@
-import Image from "next/image";
 import ScrollReveal from "@/components/common/scroll-reveal";
 import AboutMe from "./about-me";
-import Banner from "./banner";
-import WorksSwiper from "./works-swiper";
+import ContactCta from "./contact-cta";
+import Hero from "./hero";
+import Stack from "./stack";
+import Works from "./works";
 
 export default function Index() {
+	// clip, not hidden: `overflow-x: hidden` forces overflow-y from visible to
+	// auto, which would turn this div into a second vertical scroll container
 	return (
-		<div className="overflow-x-hidden">
-			<Banner />
-
-			<div className="w-full mx-auto bg-[#eff3ff] pb-[5.625rem] relative z-10 overflow-hidden max-lg:bg-[#f7f7f7] max-sm:pb-0">
-				<Image
-					src="/icons/moon.svg"
-					className="absolute top-[5.25rem] right-0 z-5 max-lg:hidden"
-					width={250}
-					height={250}
-					alt="img"
-				/>
-				<div className="absolute top-[5.188rem] -left-[6.313rem] w-[60.25rem] h-[32.938rem] opacity-10 bg-gradient-to-r from-[#ffc73a] via-[#ff008a] to-[#6100ff] blur-[62px] max-lg:hidden" />
-
-				<div className="absolute top-[3.313rem] -right-[38.75rem] w-[92.5rem] h-[53.5rem] origin-top-left rotate-[7.81deg] opacity-10 bg-gradient-to-r from-[#0019ff] to-[#6ee5c2] blur-[49.50px] max-lg:hidden" />
-				<ScrollReveal>
-					<AboutMe />
-				</ScrollReveal>
-			</div>
-			<div className="bg-[#E0F0FF] pb-[3.75rem] max-sm:pb-0">
-				<ScrollReveal delay={0.1}>
-					<WorksSwiper />
-				</ScrollReveal>
-			</div>
+		<div className="overflow-x-clip">
+			<Hero />
+			<ScrollReveal>
+				<Stack />
+			</ScrollReveal>
+			<ScrollReveal>
+				<AboutMe />
+			</ScrollReveal>
+			<ScrollReveal>
+				<Works />
+			</ScrollReveal>
+			<ScrollReveal>
+				<ContactCta />
+			</ScrollReveal>
 		</div>
 	);
 }

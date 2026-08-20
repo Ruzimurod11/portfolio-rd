@@ -46,7 +46,7 @@ const SelectLanguage = () => {
 
 	return (
 		<DropdownMenu modal={false}>
-			<DropdownMenuTrigger className="flex items-center gap-2 w-24 shadow-none border-none px-2 focus:ring-0 focus:outline-none focus-visible:ring-0 data-[state=open]:ring-0 data-[state=open]:outline-none group overflow-hidden">
+			<DropdownMenuTrigger className="group flex h-9 cursor-pointer items-center gap-2 overflow-hidden rounded-full border border-border px-3 text-muted-foreground transition-colors hover:text-foreground focus:outline-none data-[state=open]:outline-none">
 				{/* Animatsiyali til ko'rsatgich */}
 				<AnimatePresence mode="wait" initial={false}>
 					<motion.div
@@ -74,7 +74,11 @@ const SelectLanguage = () => {
 				/>
 			</DropdownMenuTrigger>
 
-			<DropdownMenuContent className="border-background p-1" asChild>
+			<DropdownMenuContent
+				align="end"
+				className="w-[var(--radix-dropdown-menu-trigger-width)] min-w-0 p-1"
+				asChild
+			>
 				<motion.div
 					initial={{ opacity: 0, scale: 0.95, y: -6 }}
 					animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -105,7 +109,7 @@ const SelectLanguage = () => {
 										<span className="text-sm">{item.label}</span>
 										{isActive && (
 											<span className="flex-1 flex justify-end">
-												<CheckIcon size={14} className="text-purple-600" />
+												<CheckIcon size={14} className="text-primary" />
 											</span>
 										)}
 									</div>

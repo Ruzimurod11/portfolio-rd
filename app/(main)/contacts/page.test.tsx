@@ -1,48 +1,49 @@
-import { render, screen } from "@testing-library/react"
+import { screen } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
+import { contacts } from "@/constants/contacts"
+import { renderWithIntl, uz } from "@/tests/utils"
 import ContactsPage from "./page"
 
 describe("Contacts page", () => {
     it("renders the heading", () => {
-        render(<ContactsPage />)
+        renderWithIntl(<ContactsPage />)
 
         expect(
-            screen.getByRole("heading", { name: "Bog'lanish" }),
+            screen.getByRole("heading", { level: 1, name: uz.contacts }),
         ).toBeInTheDocument()
     })
 
-    it("links every contact to a working target", () => {
-        render(<ContactsPage />)
+    it("links every contact to its target", () => {
+        renderWithIntl(<ContactsPage />)
 
-        const links = screen.getAllByRole("link")
-        const hrefs = links.map((link) => link.getAttribute("href"))
-
-        expect(hrefs).toEqual([
-            "mailto:ruzimurod_doniev@mail.ru",
-            "tel:+998501599603",
-            "https://t.me/ruzimurod_doniev",
-            "https://github.com/Ruzimurod11",
-            "https://www.linkedin.com/in/ruzimurod-doniev-243026266/",
-        ])
-    })
-
-    it("opens external contacts in a new tab safely", () => {
-        render(<ContactsPage />)
-
-        for (const link of screen.getAllByRole("link")) {
-            expect(link).toHaveAttribute("target", "_blank")
-            expect(link).toHaveAttribute(
-                "rel",
-                expect.stringContaining("noreferrer"),
-            )
+        for (const contact of contacts) {
+            expect(
+                screen.getByRole("link", { name: contact.value }),
+            ).toHaveAttribute("href", contact.href)
         }
     })
 
-    it("shows the visible contact details", () => {
-        render(<ContactsPage />)
+    it("opens only external contacts in a new tab", () => {
+        renderWithIntl(<ContactsPage />)
 
-        expect(screen.getByText("ruzimurod_doniev@mail.ru")).toBeInTheDocument()
-        expect(screen.getByText("+998 50 159 96 03")).toBeInTheDocument()
-        expect(screen.getByText("@ruzimurod_doniev")).toBeInTheDocument()
+        for (const contact of contacts) {
+            const link = screen.getByRole("link", { name: contact.value })
+
+            if (contact.external) {
+                expect(link).toHaveAttribute("target", "_blank")
+                expect(link.getAttribute("rel")).toContain("noopener")
+            } else {
+                // mailto: / tel: must stay in the same tab
+                expect(link).not.toHaveAttribute("target")
+            }
+        }
+    })
+
+    it("offers a copy button for the email", () => {
+        renderWithIntl(<ContactsPage />)
+
+        expect(
+            screen.getByRole("button", { name: uz.copyEmail }),
+        ).toBeInTheDocument()
     })
 })

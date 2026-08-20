@@ -1,119 +1,102 @@
-import Image from "next/image";
-import Link from "next/link";
-import ClientTranslate from "@/components/client-translate";
-import ScrollReveal from "@/components/common/scroll-reveal";
-import Title from "@/components/common/title";
+import { Gauge, GitBranch, Palette, Smartphone } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import ClientTranslate from "@/components/client-translate"
+import Section from "@/components/common/section"
+import {
+    Stagger,
+    StaggerGroup,
+    StaggerItem,
+} from "@/components/common/stagger"
 
-export default function AboutPage() {
-	return (
-		<>
-			{/* Title */}
-			<div className="relative flex justify-center items-center mb-8 max-sm:mb-6">
-				<div className="absolute left-4 text-transparent text-lg font-bold max-lg:text-[#212121]">
-					<ClientTranslate translationKey="aboutMe" />
-				</div>
-				<Title title="aboutMe" />
-			</div>
+const skills = [
+    { icon: Smartphone, title: "createSite", body: "inAllDevices" },
+    { icon: GitBranch, title: "teamWork", body: "codeInTeam" },
+    { icon: Palette, title: "knowUI", body: "createUnique" },
+    { icon: Gauge, title: "optimizationPer", body: "speedSite" },
+]
 
-			{/* Content: rasm va matn yonma-yon bo‘lishi uchun bitta flex konteyner ichida bo‘lishi kerak */}
-			<ScrollReveal direction="right">
-				<div className="flex flex-col md:flex-row items-start gap-10">
-					{/* Profile Image */}
-					<div className="relative w-40 h-40 shrink-0 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-purple-500 shadow-lg mx-auto md:mx-0">
-						{/* Fire background GIF */}
-						<div className="absolute inset-0 z-0 pointer-events-none">
-							<Image
-								src="/stars.gif"
-								alt="Fire background"
-								fill
-								className="object-cover"
-							/>
-						</div>
+export default function AboutPage({ index = "02" }: { index?: string }) {
+    return (
+        <Section index={index} title="aboutMe" description="forEachProject">
+            <Stagger className="grid gap-4 lg:grid-cols-12">
+                {/* profile card */}
+                <StaggerItem className="flex flex-col gap-6 rounded-2xl border border-border bg-surface p-6 shadow-(--shadow-card) sm:p-8 lg:col-span-5">
+                    <div className="flex items-center gap-5">
+                        <div className="relative size-20 shrink-0 overflow-hidden rounded-2xl ring-1 ring-border">
+                            <Image
+                                src="https://avatars.githubusercontent.com/u/148287289?v=4"
+                                alt="Ruzimurod Doniev"
+                                fill
+                                sizes="80px"
+                                className="object-cover"
+                            />
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-lg font-semibold">
+                                Ruzimurod Doniev
+                            </p>
+                            <p className="font-mono text-xs tracking-[0.2em] text-muted-foreground uppercase">
+                                Frontend Developer
+                            </p>
+                        </div>
+                    </div>
 
-						{/* Profile Image */}
-						<Image
-							src="https://avatars.githubusercontent.com/u/148287289?v=4"
-							alt="Frontend Developer"
-							fill
-							className="object-cover z-10 mix-blend-lighten"
-						/>
-					</div>
+                    <p className="leading-relaxed text-muted-foreground">
+                        <ClientTranslate translationKey="hello" />{" "}
+                        <span className="font-medium text-foreground">
+                            <ClientTranslate translationKey="frontendDev" />
+                        </span>{" "}
+                        — <ClientTranslate translationKey="forUsers" />
+                    </p>
 
-					{/* Description */}
-					<div className="flex-1 min-w-0 space-y-6">
-						<p className="text-gray-700 text-lg leading-7">
-							<ClientTranslate translationKey="hello" />{" "}
-							<span className="font-semibold text-purple-600">
-								<ClientTranslate translationKey="frontendDev" />
-							</span>{" "}
-							— <ClientTranslate translationKey="forUsers" />
-						</p>
+                    <div className="rounded-xl border border-border bg-background/60 p-4">
+                        <p className="font-mono text-xs tracking-[0.2em] text-muted-foreground uppercase">
+                            <ClientTranslate translationKey="myTechnologies" />
+                        </p>
+                        <p className="mt-2 text-sm">
+                            React · Next.js · TypeScript · Tailwind CSS · Framer
+                            Motion
+                        </p>
+                    </div>
 
-						<p className="text-gray-700 text-lg leading-7">
-							<strong className="text-purple-600">
-								<ClientTranslate translationKey="myTechnologies" />
-							</strong>{" "}
-							React, Next.js, TypeScript, Tailwind CSS, Framer Motion
-						</p>
+                    <div className="mt-auto flex flex-wrap gap-3">
+                        <a
+                            href="/cv/cv.pdf"
+                            download
+                            className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                        >
+                            <ClientTranslate translationKey="downloadCV" />
+                        </a>
+                        <Link
+                            href="/contacts"
+                            className="inline-flex h-10 items-center rounded-full border border-border px-5 text-sm font-medium transition-colors hover:bg-surface-hover"
+                        >
+                            <ClientTranslate translationKey="contacts" />
+                        </Link>
+                    </div>
+                </StaggerItem>
 
-						<p className="text-gray-700 text-lg leading-7">
-							<ClientTranslate translationKey="forEachProject" />
-						</p>
-
-						{/* Resume & Contact */}
-						<div className="mt-6 flex gap-4 flex-wrap relative z-10">
-							<a
-								href="./cv/cv.pdf"
-								className="px-5 py-2.5 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 transition"
-							>
-								<ClientTranslate translationKey="downloadCV" />
-							</a>
-							<Link
-								href="#contact"
-								className="px-5 py-2.5 border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-50 transition"
-							>
-								<ClientTranslate translationKey="contacts" />
-							</Link>
-						</div>
-					</div>
-				</div>
-			</ScrollReveal>
-
-			{/* Qo‘shimcha ko‘nikmalar — alohida bo‘lim */}
-			<ScrollReveal direction="left">
-				<div className="bg-purple-50 p-5 rounded-lg shadow-inner mt-16 max-w-4xl mx-auto">
-					<h2 className="text-2xl font-semibold text-purple-700 mb-3">
-						<ClientTranslate translationKey="anySkills" />
-					</h2>
-					<ul className="list-disc list-inside text-gray-700 space-y-2">
-						<li>
-							<strong>
-								<ClientTranslate translationKey="createSite" />
-							</strong>{" "}
-							<ClientTranslate translationKey="inAllDevices" />
-						</li>
-						<li>
-							<strong>
-								<ClientTranslate translationKey="teamWork" />
-							</strong>{" "}
-							<ClientTranslate translationKey="codeInTeam" />
-						</li>
-						<li>
-							<strong>
-								{" "}
-								<ClientTranslate translationKey="knowUI" />{" "}
-							</strong>{" "}
-							<ClientTranslate translationKey="createUnique" />
-						</li>
-						<li>
-							<strong>
-								<ClientTranslate translationKey="optimizationPer" />
-							</strong>{" "}
-							<ClientTranslate translationKey="speedSite" />
-						</li>
-					</ul>
-				</div>
-			</ScrollReveal>
-		</>
-	);
+                {/* skills — a group, not a plain div, so the cascade reaches them */}
+                <StaggerGroup className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
+                    {skills.map(({ icon: Icon, title, body }) => (
+                        <StaggerItem
+                            key={title}
+                            className="group rounded-2xl border border-border bg-surface p-6 shadow-(--shadow-card) transition-colors hover:border-primary/30 hover:bg-surface-hover"
+                        >
+                            <div className="grid size-10 place-items-center rounded-xl border border-border text-primary transition-colors group-hover:border-primary/40">
+                                <Icon size={18} />
+                            </div>
+                            <h3 className="mt-5 font-semibold">
+                                <ClientTranslate translationKey={title} />
+                            </h3>
+                            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                                <ClientTranslate translationKey={body} />
+                            </p>
+                        </StaggerItem>
+                    ))}
+                </StaggerGroup>
+            </Stagger>
+        </Section>
+    )
 }

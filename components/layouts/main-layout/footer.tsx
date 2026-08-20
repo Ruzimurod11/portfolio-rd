@@ -1,84 +1,74 @@
-"use client";
-
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa";
 import ClientTranslate from "@/components/client-translate";
+import { EMAIL, navLinks, socials } from "@/constants/contacts";
 
 const Footer = () => {
-	const navLinks = [
-		{ href: "/about", label: "aboutMe" },
-		{ href: "/works", label: "projects" },
-		{ href: "/contacts", label: "contacts" },
-	];
-
 	return (
-		<footer className="bg-[#2E3440] text-white py-10 border-t border-gray-300">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-					{/* Site Name / Logo */}
-					<div>
-						<h2 className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-							Ruzimurod
-						</h2>
-						<p className="mt-2 text-sm text-gray-600">
+		<footer className="border-t border-border bg-surface/40">
+			<div className="mx-auto w-full max-w-7xl px-4 py-14 xl:px-0">
+				<div className="flex flex-col justify-between gap-10 md:flex-row">
+					<div className="max-w-sm space-y-3">
+						<p className="text-lg font-semibold tracking-tight">
+							Ruzimurod<span className="text-primary">.</span>
+						</p>
+						<p className="text-sm leading-relaxed text-muted-foreground">
 							<ClientTranslate translationKey="profPortfolio" />
 						</p>
+						<a
+							href={`mailto:${EMAIL}`}
+							className="inline-block text-sm text-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
+						>
+							{EMAIL}
+						</a>
 					</div>
 
-					{/* Useful Links */}
-					<div>
-						<h3 className="text-lg font-semibold mb-4">
-							<ClientTranslate translationKey="navigation" />
-						</h3>
-						<ul className="space-y-2 text-sm">
-							{navLinks.map(({ href, label }) => (
-								<li key={href}>
-									<Link href={href} className="hover:text-purple-500">
-										<ClientTranslate translationKey={label} />
-									</Link>
-								</li>
-							))}
-						</ul>
-					</div>
+					<div className="flex gap-14">
+						<div className="space-y-4">
+							<h2 className="font-mono text-xs tracking-[0.2em] text-muted-foreground uppercase">
+								<ClientTranslate translationKey="navigation" />
+							</h2>
+							<ul className="space-y-3 text-sm">
+								{navLinks.map(({ href, label }) => (
+									<li key={href}>
+										<Link
+											href={href}
+											className="text-muted-foreground transition-colors hover:text-foreground"
+										>
+											<ClientTranslate translationKey={label} />
+										</Link>
+									</li>
+								))}
+							</ul>
+						</div>
 
-					{/* Social Links */}
-					<div>
-						<h3 className="text-lg font-semibold mb-4">
-							<ClientTranslate translationKey="socialNetworks" />
-						</h3>
-						<div className="flex gap-4 text-xl text-gray-600">
-							<a
-								href="https://github.com/"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="hover:text-purple-500"
-							>
-								<FaGithub />
-							</a>
-							<a
-								href="https://linkedin.com/"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="hover:text-purple-500"
-							>
-								<FaLinkedin />
-							</a>
-							<a
-								href="https://t.me/"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="hover:text-purple-500"
-							>
-								<FaTelegram />
-							</a>
+						<div className="space-y-4">
+							<h2 className="font-mono text-xs tracking-[0.2em] text-muted-foreground uppercase">
+								<ClientTranslate translationKey="socialNetworks" />
+							</h2>
+							<div className="flex gap-3">
+								{socials.map(({ key, label, href, icon: Icon }) => (
+									<a
+										key={key}
+										href={href}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label={label}
+										className="grid size-10 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+									>
+										<Icon size={16} />
+									</a>
+								))}
+							</div>
 						</div>
 					</div>
 				</div>
 
-				{/* Copyright */}
-				<div className="mt-10 text-center text-sm text-gray-500">
-					© {new Date().getFullYear()} Ruzimurod.{" "}
-					<ClientTranslate translationKey="allRights" />
+				<div className="mt-12 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+					<p>
+						© {new Date().getFullYear()} Ruzimurod.{" "}
+						<ClientTranslate translationKey="allRights" />
+					</p>
+					<p className="font-mono">Next.js · TypeScript · Tailwind CSS</p>
 				</div>
 			</div>
 		</footer>

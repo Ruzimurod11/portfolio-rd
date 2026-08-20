@@ -1,94 +1,68 @@
-"use client";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import AboutPage from "@/app/_components/about-me/about-page";
+import PageHeader from "@/components/common/page-header";
+import ScrollReveal from "@/components/common/scroll-reveal";
+import Section from "@/components/common/section";
+import MainLayout from "@/components/layouts/main-layout";
+import ClientTranslate from "@/components/client-translate";
+import { experience } from "@/constants/experience";
+import { stack } from "@/constants/stack";
 
-import type { Variants } from "framer-motion";
-import { motion } from "framer-motion";
-import Image from "next/image";
-
-const container: Variants = {
-	hidden: { opacity: 0 },
-	show: {
-		opacity: 1,
-		transition: { staggerChildren: 0.15 },
-	},
-};
-
-const item: Variants = {
-	hidden: { opacity: 0, y: 30 },
-	show: {
-		opacity: 1,
-		y: 0,
-		transition: { duration: 0.5, ease: "easeOut" as const },
-	},
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const t = await getTranslations();
+	return { title: t("aboutMe") };
+}
 
 export default function Page() {
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-[#eff3ff] to-[#e0f0ff] flex items-center justify-center px-6">
-			<motion.div
-				variants={container}
-				initial="hidden"
-				animate="show"
-				className="max-w-2xl w-full text-center space-y-6"
-			>
-				{/* Avatar */}
-				<motion.div variants={item} className="flex justify-center">
-					<div className="relative w-24 h-24 rounded-full bg-purple-200 border-3 border-purple-500 overflow-hidden">
-						<Image
-							src="https://avatars.githubusercontent.com/u/148287289?v=4"
-							alt="avatar"
-							fill
-							className="w-full h-full object-cover"
-						/>
+		<MainLayout className="pb-24">
+			<PageHeader
+				eyebrow="aboutMe"
+				title="frontendDev"
+				description="heroPitch"
+			/>
+
+			<AboutPage index="01" />
+
+			<ScrollReveal>
+				<Section index="02" title="stackTitle" description="stackDesc">
+					<div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+						{stack.map(({ name, icon: Icon }) => (
+							<div
+								key={name}
+								className="flex flex-col items-center gap-3 rounded-xl border border-border bg-surface p-5 text-center shadow-[var(--shadow-card)] transition-colors hover:border-primary/30 hover:bg-surface-hover"
+							>
+								<Icon size={26} className="text-muted-foreground" />
+								<span className="text-xs font-medium">{name}</span>
+							</div>
+						))}
 					</div>
-				</motion.div>
+				</Section>
+			</ScrollReveal>
 
-				{/* Ism */}
-				<motion.h1
-					variants={item}
-					className="text-4xl font-bold text-purple-700"
-				>
-					Ruzimurod
-				</motion.h1>
-
-				{/* Lavozim */}
-				<motion.p variants={item} className="text-lg text-gray-500 font-medium">
-					Frontend Developer
-				</motion.p>
-
-				{/* Divider */}
-				<motion.div
-					variants={item}
-					className="w-16 h-1 bg-purple-400 rounded-full mx-auto"
-				/>
-
-				{/* Bio */}
-				<motion.p
-					variants={item}
-					className="text-gray-600 text-base leading-relaxed"
-				>
-					React, Next.js, TypeScript, Tailwind CSS va Framer Motion bilan
-					foydalanuvchi uchun qulay va chiroyli interfeylar yarataman.
-				</motion.p>
-
-				{/* Tugmalar */}
-				<motion.div
-					variants={item}
-					className="flex justify-center gap-4 flex-wrap"
-				>
-					<a
-						href="./cv/cv.pdf"
-						className="px-6 py-2.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm font-medium"
-					>
-						CV yuklab olish
-					</a>
-					<a
-						href="#contact"
-						className="px-6 py-2.5 border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-50 transition text-sm font-medium"
-					>
-						Bog'lanish
-					</a>
-				</motion.div>
-			</motion.div>
-		</div>
+			{/* rendered only once constants/experience.ts is filled in */}
+			{experience.length > 0 && (
+				<ScrollReveal>
+					<Section index="03" title="experience">
+						<ol className="relative border-l border-border pl-6">
+							{experience.map((item) => (
+								<li key={`${item.company}-${item.period}`} className="pb-10 last:pb-0">
+									<span className="absolute -left-1.5 size-3 rounded-full border-2 border-background bg-primary" />
+									<p className="font-mono text-xs tracking-[0.2em] text-muted-foreground uppercase">
+										{item.period}
+									</p>
+									<h3 className="mt-2 text-lg font-semibold">{item.role}</h3>
+									<p className="text-sm text-primary">{item.company}</p>
+									<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+										<ClientTranslate translationKey={item.descriptionKey} />
+									</p>
+								</li>
+							))}
+						</ol>
+					</Section>
+				</ScrollReveal>
+			)}
+		</MainLayout>
 	);
 }
