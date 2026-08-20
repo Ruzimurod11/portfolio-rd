@@ -1,12 +1,12 @@
 "use client"
 
+import { usePathname } from "next/navigation"
 import {
     createContext,
     FC,
     ReactNode,
     useCallback,
     useContext,
-    useEffect,
     useState,
 } from "react"
 
@@ -22,24 +22,17 @@ const ModalContext = createContext<ModalContextType | undefined>(undefined)
 
 // Client-side modal content component
 const ModalProviderContent: FC<{ children: ReactNode }> = ({ children }) => {
-    const [mounted, setMounted] = useState(false)
+    const pathname = usePathname()
     const [modals, setModals] = useState<Record<string, boolean>>({})
-    const [currentPath, setCurrentPath] = useState<string>("")
+    const [currentPath, setCurrentPath] = useState(pathname)
 
-    useEffect(() => {
-        setMounted(true)
-        setCurrentPath(window.location.pathname)
-    }, [])
-
-    useEffect(() => {
-        if (mounted) {
-            const pathname = window.location.pathname
-            if (currentPath !== pathname) {
-                setCurrentPath(pathname)
-                setModals({})
-            }
-        }
-    }, [mounted, currentPath])
+    // Close every modal when the route changes. Adjusting the state during
+    // render (instead of in an effect) keeps this off the cascading-render
+    // path and, unlike reading window.location, actually reacts to navigation.
+    if (currentPath !== pathname) {
+        setCurrentPath(pathname)
+        setModals({})
+    }
 
     const openModal = useCallback((key: string) => {
         setModals((prev) => ({ ...prev, [key]: true }))
@@ -48,10 +41,6 @@ const ModalProviderContent: FC<{ children: ReactNode }> = ({ children }) => {
     const closeModal = useCallback((key: string) => {
         setModals((prev) => ({ ...prev, [key]: false }))
     }, [])
-
-    if (!mounted) {
-        return null
-    }
 
     return (
         <ModalContext.Provider value={{ modals, openModal, closeModal }}>

@@ -94,8 +94,12 @@ const Content = () => {
 
 	useEffect(() => {
 		if (!emblaApi) return;
+		// embla starts on snap 0, which selectedIndex already defaults to, so
+		// subscribing is enough — no synchronous state sync needed here
 		emblaApi.on("select", onSelect);
-		onSelect();
+		return () => {
+			emblaApi.off("select", onSelect);
+		};
 	}, [emblaApi, onSelect]);
 	return (
 		<div>

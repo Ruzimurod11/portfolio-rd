@@ -1,25 +1,17 @@
-import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-});
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
+import nextTypescript from "eslint-config-next/typescript";
+import prettier from "eslint-config-prettier";
 
 const eslintConfig = [
-    ...compat.config({
-        extends: [
-            "next/core-web-vitals",
-            "next/typescript",
-            "prettier",
-            "eslint:recommended",
-            "plugin:@tanstack/query/recommended",
-        ],
+    {
+        ignores: [".next/**", "out/**", "build/**", "next-env.d.ts"],
+    },
+    js.configs.recommended,
+    ...nextCoreWebVitals,
+    ...nextTypescript,
+    prettier,
+    {
         rules: {
             "react/no-unescaped-entities": "off",
             "no-irregular-whitespace": "off",
@@ -37,9 +29,8 @@ const eslintConfig = [
             ],
             "@typescript-eslint/prefer-nullish-coalescing": "off",
             "@typescript-eslint/consistent-type-definitions": "off",
-            "@tanstack/query/exhaustive-deps": "off",
         },
-    }),
+    },
 ];
 
 export default eslintConfig;

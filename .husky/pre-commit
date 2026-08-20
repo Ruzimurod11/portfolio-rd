@@ -1,5 +1,1 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-# Run lint-staged with error reporting
-npx lint-staged --no-stash || exit 1
+pnpm exec lint-staged

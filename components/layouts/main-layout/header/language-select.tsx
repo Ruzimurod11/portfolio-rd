@@ -5,7 +5,8 @@ import Cookies from "js-cookie";
 import { CheckIcon, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useLocale } from "next-intl";
+import { useState } from "react";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -18,17 +19,15 @@ import { cn } from "@/lib/utils";
 
 const SelectLanguage = () => {
 	const router = useRouter();
+	// next-intl already resolved the locale from the cookie on the server, so
+	// deriving from it keeps server and client in sync — no mount effect and no
+	// flash of the default language before the cookie is read.
+	const locale = useLocale();
 	const [currentLang, setCurrentLang] = useState<(typeof languages)[number]>(
-		languages[0],
+		() => languages.find((l) => l.value === locale) ?? languages[0],
 	);
 	const [, setPrevLang] = useState<(typeof languages)[number]>(languages[0]);
 	const [direction, setDirection] = useState(1);
-
-	useEffect(() => {
-		const savedLang = Cookies.get(LANGUAGE_KEY);
-		const foundLang = languages.find((l) => l.value === savedLang);
-		if (foundLang) setCurrentLang(foundLang);
-	}, []);
 
 	const handleLanguageChange = (val: string) => {
 		if (val !== currentLang.value) {
