@@ -89,6 +89,24 @@ export const projects: IProject[] = [
         featured: true,
     },
     {
+        slug: "genfin",
+        name: "GenFin",
+        descriptionKey: "projectGenfinDesc",
+        image: "/genfin.png",
+        repo: "https://github.com/Ruzimurod11/upgrow-genFin",
+        demo: "https://genfin.uz",
+        tech: [
+            "React",
+            "TypeScript",
+            "Vite",
+            "TanStack Router",
+            "TanStack Query",
+            "i18next",
+            "Tailwind",
+        ],
+        featured: true,
+    },
+    {
         slug: "dummyjson",
         name: "CRUD API",
         descriptionKey: "projectCrudDesc",
@@ -96,7 +114,6 @@ export const projects: IProject[] = [
         repo: "https://github.com/Ruzimurod11/dummyjson",
         demo: "https://dummy-rd.netlify.app/",
         tech: ["React", "TypeScript", "TanStack Query", "Tailwind", "Zustand"],
-        featured: true,
     },
     {
         slug: "tortlar",

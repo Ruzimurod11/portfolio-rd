@@ -21,15 +21,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
 	title: {
-		default: "Ruzimurod — Frontend Developer",
+		default: "Ruzimurod — Fullstack AI Engineer",
 		template: "%s · Ruzimurod",
 	},
 	description:
-		"Frontend developer. React, Next.js, TypeScript va Tailwind CSS bilan tez, qulay va zamonaviy interfeyslar quraman.",
+		"Fullstack AI engineer. React, Next.js va TypeScript bilan interfeys, Python, Django va PostgreSQL bilan API quraman — Claude Code bilan agent-first.",
 	openGraph: {
-		title: "Ruzimurod — Frontend Developer",
+		title: "Ruzimurod — Fullstack AI Engineer",
 		description:
-			"React, Next.js, TypeScript va Tailwind CSS bilan tez, qulay va zamonaviy interfeyslar.",
+			"React, Next.js, TypeScript, Python, Django, PostgreSQL va Docker — interfeysdan API'gacha.",
 		type: "website",
 	},
 };

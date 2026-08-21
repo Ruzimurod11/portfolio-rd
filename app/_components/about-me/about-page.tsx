@@ -37,7 +37,7 @@ export default function AboutPage({ index = "02" }: { index?: string }) {
                                 Ruzimurod Doniev
                             </p>
                             <p className="font-mono text-xs tracking-[0.2em] text-muted-foreground uppercase">
-                                Frontend Developer
+                                Fullstack AI Engineer
                             </p>
                         </div>
                     </div>
@@ -45,7 +45,7 @@ export default function AboutPage({ index = "02" }: { index?: string }) {
                     <p className="leading-relaxed text-muted-foreground">
                         <ClientTranslate translationKey="hello" />{" "}
                         <span className="font-medium text-foreground">
-                            <ClientTranslate translationKey="frontendDev" />
+                            <ClientTranslate translationKey="roleTitle" />
                         </span>{" "}
                         — <ClientTranslate translationKey="forUsers" />
                     </p>
@@ -55,15 +55,15 @@ export default function AboutPage({ index = "02" }: { index?: string }) {
                             <ClientTranslate translationKey="myTechnologies" />
                         </p>
                         <p className="mt-2 text-sm">
-                            React · Next.js · TypeScript · Tailwind CSS · Framer
-                            Motion
+                            React · Next.js · TypeScript · Python · Django ·
+                            PostgreSQL · Docker
                         </p>
                     </div>
 
                     <div className="mt-auto flex flex-wrap gap-3">
                         <a
-                            href="/cv/cv.pdf"
-                            download
+                            href="/cv/resume.pdf"
+                            download="Ruzimurod-Doniev-CV.pdf"
                             className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
                         >
                             <ClientTranslate translationKey="downloadCV" />

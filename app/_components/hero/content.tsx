@@ -42,9 +42,9 @@ export default function HeroContent() {
 					transition={{ duration: 0.6, ease: "easeOut" }}
 					className="text-5xl leading-[0.95] font-semibold tracking-[-0.04em] sm:text-7xl lg:text-8xl"
 				>
-					Frontend
+					Fullstack
 					<br />
-					Developer<span className="text-primary">.</span>
+					AI Engineer<span className="text-primary">.</span>
 				</motion.h1>
 			</div>
 
@@ -73,8 +73,8 @@ export default function HeroContent() {
 				</Link>
 
 				<a
-					href="/cv/cv.pdf"
-					download
+					href="/cv/resume.pdf"
+					download="Ruzimurod-Doniev-CV.pdf"
 					className="inline-flex h-11 items-center gap-2 rounded-full border border-border px-6 text-sm font-medium transition-colors hover:bg-surface-hover"
 				>
 					<Download size={16} />

@@ -29,7 +29,7 @@ const lines: Token[][] = [
     [
         { text: "  role", className: key },
         { text: ": ", className: dim },
-        { text: '"Frontend Developer"', className: str },
+        { text: '"Fullstack AI Engineer"', className: str },
         { text: ",", className: dim },
     ],
     [
@@ -37,10 +37,16 @@ const lines: Token[][] = [
         { text: ": [", className: dim },
         { text: '"React"', className: str },
         { text: ", ", className: dim },
-        { text: '"Next.js"', className: str },
+        { text: '"Django"', className: str },
         { text: ", ", className: dim },
-        { text: '"TypeScript"', className: str },
+        { text: '"Docker"', className: str },
         { text: "],", className: dim },
+    ],
+    [
+        { text: "  agent", className: key },
+        { text: ": ", className: dim },
+        { text: '"Claude Code"', className: str },
+        { text: ",", className: dim },
     ],
     [
         { text: "  available", className: key },

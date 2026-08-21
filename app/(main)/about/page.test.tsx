@@ -8,7 +8,7 @@ describe("About page", () => {
         renderWithIntl(<AboutPage />)
 
         expect(
-            screen.getByRole("heading", { level: 1, name: uz.frontendDev }),
+            screen.getByRole("heading", { level: 1, name: uz.roleTitle }),
         ).toBeInTheDocument()
     })
 
@@ -24,7 +24,7 @@ describe("About page", () => {
 
         expect(
             screen.getByRole("link", { name: uz.downloadCV }),
-        ).toHaveAttribute("href", "/cv/cv.pdf")
+        ).toHaveAttribute("href", "/cv/resume.pdf")
         expect(screen.getByRole("link", { name: uz.contacts })).toHaveAttribute(
             "href",
             "/contacts",
