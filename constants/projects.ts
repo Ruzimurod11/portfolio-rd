@@ -72,6 +72,23 @@ export const projects: IProject[] = [
         featured: true,
     },
     {
+        slug: "donatone",
+        name: "Donatone",
+        descriptionKey: "projectDonatoneDesc",
+        image: "/donatone.png",
+        repo: "https://github.com/Ruzimurod11/donatone-front",
+        demo: "https://donatone.uz",
+        tech: [
+            "React",
+            "TypeScript",
+            "Vite",
+            "TanStack Router",
+            "TanStack Query",
+            "Tailwind",
+        ],
+        featured: true,
+    },
+    {
         slug: "dummyjson",
         name: "CRUD API",
         descriptionKey: "projectCrudDesc",
