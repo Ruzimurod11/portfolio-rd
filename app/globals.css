@@ -221,6 +221,16 @@
         mask-image: linear-gradient(to bottom, black 55%, transparent);
     }
 
+    /* fades a grid layer towards every edge, so no cell is cut off mid-square
+       against a rounded card border */
+    .mask-fade-edges {
+        mask-image: radial-gradient(
+            ellipse 70% 70% at 50% 50%,
+            black 20%,
+            transparent 90%
+        );
+    }
+
     .animate-marquee {
         animation: marquee 40s linear infinite;
     }

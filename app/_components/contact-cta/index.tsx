@@ -6,7 +6,8 @@ import { EMAIL, socials } from "@/constants/contacts";
 export default function ContactCta() {
 	return (
 		<MainLayout className="pb-24">
-			<div className="bg-grid relative isolate overflow-hidden rounded-3xl border border-border bg-surface px-6 py-16 text-center shadow-[var(--shadow-card)] sm:px-12">
+			<div className="relative isolate overflow-hidden rounded-3xl border border-border bg-surface px-6 py-16 text-center shadow-[var(--shadow-card)] sm:px-12">
+				<div className="bg-grid mask-fade-edges pointer-events-none absolute inset-0 -z-10 bg-center" />
 				<div className="bg-glow pointer-events-none absolute inset-0 -z-10" />
 
 				<h2 className="text-3xl font-semibold sm:text-5xl">
